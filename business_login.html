@@ -1,0 +1,171 @@
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Business Login & Dashboard</title>
+    <style>
+        body {
+            font-family: Arial;
+            margin: 0;
+            background: #f4f6f9;
+        }
+
+        .login-container {
+            width: 350px;
+            margin: 80px auto;
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px gray;
+            text-align: center;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .warning {
+            color: red;
+            font-size: 12px;
+        }
+
+        .dashboard {
+            display: none;
+        }
+
+        .sidebar {
+            width: 200px;
+            height: 100vh;
+            background: #343a40;
+            color: white;
+            position: fixed;
+            padding: 20px;
+        }
+
+        .sidebar h3 {
+            color: #00c3ff;
+        }
+
+        .sidebar p {
+            cursor: pointer;
+            margin: 15px 0;
+        }
+
+        .main {
+            margin-left: 220px;
+            padding: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 20px;
+            margin: 10px;
+            display: inline-block;
+            width: 200px;
+            box-shadow: 0 0 5px gray;
+            border-radius: 8px;
+        }
+
+        .logout {
+            background: red;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- LOGIN PAGE -->
+<div class="login-container" id="loginPage">
+    <h2>Business Login</h2>
+
+    <input type="text" id="username" placeholder="Username">
+    <input type="password" id="password" placeholder="Password">
+
+    <button onclick="login()">Login</button>
+
+    <hr>
+
+    <!-- REGISTER SECTION -->
+    <h3>Register</h3>
+    <input type="text" id="regUser" placeholder="Create Username">
+    <input type="password" id="regPass" placeholder="Create Password">
+    <button onclick="register()">Register</button>
+
+    <p class="warning">⚠ Demo only – do not use real credentials</p>
+</div>
+
+<!-- DASHBOARD -->
+<div class="dashboard" id="dashboard">
+
+    <div class="sidebar">
+        <h3>Admin Panel</h3>
+        <p>🏠 Dashboard</p>
+        <p>📦 Orders</p>
+        <p>👥 Customers</p>
+        <p>⚙ Settings</p>
+
+        <button class="logout" onclick="logout()">Logout</button>
+    </div>
+
+    <div class="main">
+        <h1>Welcome 👋</h1>
+
+        <div class="card">Total Sales<br><b>₹25,000</b></div>
+        <div class="card">Orders<br><b>120</b></div>
+        <div class="card">Customers<br><b>80</b></div>
+
+    </div>
+</div>
+
+<script>
+function register() {
+    let user = document.getElementById("regUser").value;
+    let pass = document.getElementById("regPass").value;
+
+    if(user === "" || pass === "") {
+        alert("Please fill all fields");
+        return;
+    }
+
+    localStorage.setItem("username", user);
+    localStorage.setItem("password", pass);
+
+    alert("Registration Successful!");
+}
+
+function login() {
+    let user = document.getElementById("username").value;
+    let pass = document.getElementById("password").value;
+
+    let savedUser = localStorage.getItem("username");
+    let savedPass = localStorage.getItem("password");
+
+    if(user === savedUser && pass === savedPass) {
+        document.getElementById("loginPage").style.display = "none";
+        document.getElementById("dashboard").style.display = "block";
+    } else {
+        alert("Invalid Login");
+    }
+}
+
+function logout() {
+    document.getElementById("dashboard").style.display = "none";
+    document.getElementById("loginPage").style.display = "block";
+}
+</script>
+
+</body>
+</html>
+```
